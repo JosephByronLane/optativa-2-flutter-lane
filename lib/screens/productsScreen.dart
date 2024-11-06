@@ -8,92 +8,88 @@ class ProductsScreen extends StatelessWidget {
 
   const ProductsScreen({Key? key, required this.categoryUrl}) : super(key: key);
 
- @override
+@override
   Widget build(BuildContext context) {
     Future<List<ProductResponse>> futureProducts =
         ProductsRepository().execute(categoryUrl);
 
     return Scaffold(
       appBar: AppBar(
-        title:Center(child: 
-         Text(
-          "Products",
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.white),
-        ))
+        title: Text("Products"),
       ),
       body: FutureBuilder<List<ProductResponse>>(
         future: futureProducts,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<ProductResponse> products = snapshot.data!;
-            return GridView.builder(
+            double itemWidth = (MediaQuery.of(context).size.width - 24) / 2;
+
+            return SingleChildScrollView(
               padding: EdgeInsets.all(8.0),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, 
-                crossAxisSpacing: 8.0,
-                mainAxisSpacing: 8.0,
-                childAspectRatio: 1.25,
-                ),
-              itemCount: products.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  elevation: 4.0,
-                  child: Padding(padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                        SizedBox(
-                        height: 50.0,
-                        child: Image.network(
-                          products[index].thumbnail,
-                          fit: BoxFit.fill,
-                        ),
-                        ),
-                        Divider(),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text(
-                            products[index].title,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold,
+              child: Wrap(
+                spacing: 8.0,
+                runSpacing: 8.0, 
+                children: products.map((product) {
+                  return Container(
+                    width: itemWidth,
+                    child: Card(
+                      elevation: 4.0,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min, 
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Container(
+                            height: 150, 
+                            child: Image.network(
+                              product.thumbnail,
+                              fit: BoxFit.cover,
                             ),
                           ),
-                        ),
-                      ),
-                      Center(
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Detailsscreen(
-                                  productId: products[index].id,
+                          Divider(),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Center(
+                              child: Text(
+                                product.title,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            );
-                          },
-                          child: 
-                          const Text('Detalles',
-                            style: TextStyle(
-                              color: Colors.blue,
-                                decoration: TextDecoration.underline,
-                                decorationColor: Colors.blue,
                             ),
                           ),
-                        ),
+                          Center(
+                            child: GestureDetector(
+                              onTap: () {
+                                // Navigate to the product details screen
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Detailsscreen(
+                                      productId: product.id,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                'Details',
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-                );
-              },
+                    ),
+                  );
+                }).toList(),
+              ),
             );
           } else {
-            return const Center(
+            return Center(
               child: CircularProgressIndicator(),
             );
           }

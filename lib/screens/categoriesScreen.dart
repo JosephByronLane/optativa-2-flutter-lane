@@ -12,7 +12,8 @@ class Categoriesscreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Categories"),
+        title: Center(child: 
+        Text("Categorias", style: TextStyle(color: Colors.white),),),
       ),
       body: FutureBuilder<List<CategoriesResponse>>(
         future: categories,
