@@ -9,8 +9,6 @@ class ListRoutes {
   static final Map<String, Widget Function(BuildContext)> listScreens = {
     Routes.loginScreen: (context) => loginScreen(),
     Routes.categoryScreen: (context) =>  Categoriesscreen(),
-    Routes.productsScreen: (context) =>  Productsscreen(),
-    Routes.detailsScreen: (context) => Detailsscreen(),
   };
 
   // static List<MenuOptions> menuOptions = [

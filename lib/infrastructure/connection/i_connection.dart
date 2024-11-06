@@ -1,9 +1,9 @@
 abstract class Iconnection {
-  get<T>(String url, {Map<String, String>? headers}) async {}
+  get<O>(String url, {Map<String, String>? headers}) async {}
 
-  post<T, D>(String url, D data, {Map<String, String>? headers}) async {}
+  post<O, I>(String url, I data, {Map<String, String>? headers}) async {}
 
-  put<T, D>(String url, D data, {Map<String, String>? headers}) async {}
+  put<O, I>(String url, I data, {Map<String, String>? headers}) async {}
 
-  delete<T>(String url, {Map<String, String>? headers}) async {}
+  delete<O>(String url, {Map<String, String>? headers}) async {}
 }

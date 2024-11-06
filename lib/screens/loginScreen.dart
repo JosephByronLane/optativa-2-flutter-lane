@@ -21,12 +21,24 @@ class _loginScreenState extends State<loginScreen> {
 
     return 
     Scaffold(
+      appBar: AppBar(
+        title: const Center(child: Text('Login')),
+      ),
       body: Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-           Padding(padding:  EdgeInsets.all(16.0),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.network(
+              'https://servicios.unimodelo.edu.mx/merida/upa/images/appsmodelo.png',
+              height: 150,
+              width: 150,
+              fit: BoxFit.cover,
+            ),
+          ),
+           Padding(padding:  EdgeInsets.all(0),
             child: 
               TextField(
                 controller: userController,
@@ -37,7 +49,8 @@ class _loginScreenState extends State<loginScreen> {
                 style: TextStyle(),
               ),
             ),
-          Padding(padding: const EdgeInsets.all(16.1),
+            Divider(),
+          Padding(padding: const EdgeInsets.all(0),
             child: 
               TextField(
                 controller: passwordController,
@@ -48,6 +61,7 @@ class _loginScreenState extends State<loginScreen> {
                 ),
               ),
           ),
+          Divider(),
           TextButton(
             onPressed: () {
               setState(() {
@@ -69,7 +83,7 @@ class _loginScreenState extends State<loginScreen> {
                 borderRadius: BorderRadius.circular(8.0),
               ),
             ),
-            child: const Text('Login'),
+            child: const Text('Ingresar', style: TextStyle(color: Colors.white)),
           ),
           if (message != null) 
             Text(

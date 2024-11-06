@@ -4,13 +4,13 @@ import 'package:http/http.dart' as http;
 
 class Connection implements Iconnection {
   @override
-  Future<T> get<T>(String url, {Map<String, String>? headers}) async {
+  Future<O> get<O>(String url, {Map<String, String>? headers}) async {
     final response = await http.get(Uri.parse(url), headers: headers);
-    return jsonDecode(response.body) as T;
+    return jsonDecode(response.body) as O;
   }
 
   @override
-  Future<T> post<T, D>(String url, D data,
+  Future<O> post<O, I>(String url, I data,
       {Map<String, String>? headers}) async {
     final response = await http.post(
       Uri.parse(url),
@@ -19,18 +19,18 @@ class Connection implements Iconnection {
     );
 
     if (response.statusCode == 200) {
-      return jsonDecode(response.body) as T;
+      return jsonDecode(response.body) as O;
     }
     throw Exception('Error en la solicitud: ${response.statusCode}');
   }
 
   @override
-  delete<T>(String url, {Map<String, String>? headers}) {
+  delete<O>(String url, {Map<String, String>? headers}) {
     throw UnimplementedError();
   }
 
   @override
-  put<T, D>(String url, D data, {Map<String, String>? headers}) {
+  put<O,I>(String url,I data, {Map<String, String>? headers}) {
     throw UnimplementedError();
   }
 }
