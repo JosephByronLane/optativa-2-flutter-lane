@@ -14,9 +14,18 @@ class Detailsscreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text("Detalle de product", style: TextStyle(color: Colors.white),),
-          
+        backgroundColor: Colors.blue,
+        flexibleSpace: Center(
+          child: Padding(
+            padding: EdgeInsets.only(top: 16.0),
+            child: Text(
+              'Detalle de product',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 30,
+              ),
+            ),
+          ),
         ),
       ),
       body: FutureBuilder<ProductDetailResponse>(
@@ -30,15 +39,13 @@ class Detailsscreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Display the image without cutting it off
                   if (product.images.isNotEmpty)
                     Image.network(
                       product.images[0],
                       width: double.infinity,
-                      fit: BoxFit.contain, // Use BoxFit.contain to avoid cropping
+                      fit: BoxFit.contain, 
                     ),
                   SizedBox(height: 16.0),
-                  // Center the title
                   Center(
                     child: Text(
                       product.title,

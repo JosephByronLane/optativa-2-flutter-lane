@@ -14,9 +14,21 @@ class ProductsScreen extends StatelessWidget {
         ProductsRepository().execute(categoryUrl);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Products"),
-      ),
+      appBar:AppBar(
+          backgroundColor: Colors.blue,
+          flexibleSpace: Center(
+            child: Padding(
+              padding: EdgeInsets.only(top: 16.0),
+              child: Text(
+                'Products',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                ),
+              ),
+            ),
+          ),
+        ),
       body: FutureBuilder<List<ProductResponse>>(
         future: futureProducts,
         builder: (context, snapshot) {

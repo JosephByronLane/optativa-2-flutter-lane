@@ -12,8 +12,19 @@ class Categoriesscreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: 
-        Text("Categorias", style: TextStyle(color: Colors.white),),),
+        backgroundColor: Colors.blue,
+        flexibleSpace: Center(
+          child: Padding(
+            padding: EdgeInsets.only(top: 16.0),
+            child: Text(
+              'Categorias',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 30,
+              ),
+            ),
+          ),
+        ),
       ),
       body: FutureBuilder<List<CategoriesResponse>>(
         future: categories,
@@ -35,6 +46,7 @@ class Categoriesscreen extends StatelessWidget {
                     leading: Icon(icon, color: color),
                     trailing: Icon(Icons.arrow_forward_ios, color: color),
                     title: Text(options[index].name),
+                    subtitle: Text("Profe no hay fecha, que se pone aqui?"),
                     onTap: () {
                       Navigator.push(
                         context,
