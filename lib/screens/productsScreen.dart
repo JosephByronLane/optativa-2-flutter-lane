@@ -16,7 +16,7 @@ class ProductsScreen extends StatelessWidget {
     return Scaffold(
       appBar:AppBar(
           backgroundColor: Colors.blue,
-          flexibleSpace: Center(
+          flexibleSpace: const Center(
             child: Padding(
               padding: EdgeInsets.only(top: 16.0),
               child: Text(
@@ -54,7 +54,7 @@ class ProductsScreen extends StatelessWidget {
                             height: 150, 
                             child: Image.network(
                               product.thumbnail,
-                              fit: BoxFit.cover,
+                              fit: BoxFit.contain,
                             ),
                           ),
                           Divider(),
@@ -84,11 +84,12 @@ class ProductsScreen extends StatelessWidget {
                                   ),
                                 );
                               },
-                              child: Text(
+                              child: const Text(
                                 'Details',
                                 style: TextStyle(
                                   color: Colors.blue,
                                   decoration: TextDecoration.underline,
+                                  decorationColor: Colors.blue,
                                 ),
                               ),
                             ),

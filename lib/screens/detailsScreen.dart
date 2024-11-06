@@ -45,7 +45,6 @@ class Detailsscreen extends StatelessWidget {
                       width: double.infinity,
                       fit: BoxFit.contain, 
                     ),
-                  SizedBox(height: 16.0),
                   Center(
                     child: Text(
                       product.title,
@@ -56,17 +55,14 @@ class Detailsscreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  SizedBox(height: 8.0),
-                  // Add a Divider
                   Divider(),
-                  SizedBox(height: 8.0),
-                  // Display the description
-                  Text(
-                    product.description,
-                    style: TextStyle(fontSize: 16.0),
-                  ),
-                  SizedBox(height: 16.0),
-                  // Display price and stock in a row
+                    Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: Text(
+                      product.description,
+                      style: TextStyle(fontSize: 16.0),
+                    ),
+                    ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
