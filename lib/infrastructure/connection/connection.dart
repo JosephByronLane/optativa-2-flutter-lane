@@ -17,11 +17,8 @@ class Connection implements Iconnection {
       headers: headers,
       body: jsonEncode(data),
     );
-
-    if (response.statusCode == 200) {
       return jsonDecode(response.body) as O;
-    }
-    throw Exception('Error en la solicitud: ${response.statusCode}');
+    
   }
 
   @override

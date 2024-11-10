@@ -13,7 +13,7 @@ class Categoriesscreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        flexibleSpace: Center(
+        flexibleSpace: const Center(
           child: Padding(
             padding: EdgeInsets.only(top: 16.0),
             child: Text(
@@ -29,7 +29,12 @@ class Categoriesscreen extends StatelessWidget {
       body: FutureBuilder<List<CategoriesResponse>>(
         future: categories,
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
+          if(snapshot.hasData == false ){
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+         
             List<CategoriesResponse> options = snapshot.data!;
             return Padding(
               padding: const EdgeInsets.all(10.0),
@@ -59,11 +64,7 @@ class Categoriesscreen extends StatelessWidget {
                 },
               ),
             );
-          } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+       
         },
       ),
     );

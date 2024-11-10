@@ -1,5 +1,8 @@
+import 'package:examen_movil/modules/login/domain/dto/user_credentials.dart';
+import 'package:examen_movil/modules/login/useCase/loginUseCase.dart';
 import 'package:examen_movil/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
 
 class loginScreen extends StatefulWidget {
   loginScreen({super.key});
@@ -65,15 +68,18 @@ class _loginScreenState extends State<loginScreen> {
           TextButton(
             onPressed: () {
               setState(() {
+                final LocalStorage storage = LocalStorage('localstorage_app');
+
+               final credentials = UserCredentials(
+                    user: userController.text,
+                    password: passwordController.text);
+
+                LoginUseCase().execute(credentials).then((response) {
+                   print(response.accesToken);
+                    storage.setItem("token", response.accesToken);
+                });   
                 Navigator.pushNamed(context, Routes.categoryScreen);
-
-
-              // if (aaaaa.checkCredentials(userController.text, passwordController.text)) {
-              //   Navigator.pushNamed(context, Routes.list);
-              //   print("aaaa");
-              // } else {
-              //   message = 'Incorrecto';
-              // }   
+ 
               });                   
             },
             style: TextButton.styleFrom(
