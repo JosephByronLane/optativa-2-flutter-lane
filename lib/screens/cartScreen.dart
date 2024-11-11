@@ -26,7 +26,7 @@ class CartScreen extends StatelessWidget {
             if (cartItems.isEmpty) {
               return const Center(
                 child: Text(
-                  'Your cart is empty.',
+                  'Carrito vacio.',
                   style: TextStyle(fontSize: 20),
                 ),
               );

@@ -61,7 +61,7 @@ class Categoriesscreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text('Go to Login'),
+                    child: const Text('Ir a login.'),
                   ),
                 ],
               ),
