@@ -189,6 +189,7 @@ class _DetailsscreenState extends State<Detailsscreen> {
       }
 
       cart.add({
+        'image': product.images.isNotEmpty ? product.images[0] : null,
         'name': product.title,
         'quantity': _selectedQuantity,
         'price': product.price,

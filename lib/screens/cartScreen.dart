@@ -44,7 +44,13 @@ class CartScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         var item = cartItems[index];
                         return ListTile(
-                          leading: Icon(Icons.shopping_cart, color: Colors.blue),
+                          leading: Image.network(
+                            item['image'],
+                            height: 100,
+                            width: 100,
+                            fit: BoxFit.contain,
+
+                          ),
                           title: Text(
                             item['name'],
                             style: const TextStyle(fontWeight: FontWeight.bold),
