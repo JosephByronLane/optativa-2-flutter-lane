@@ -6,13 +6,16 @@ import '../domain/repository/login_repository.dart';
 class LoginUseCase implements UseCase<dynamic, UserCredentials> {
   @override
   Future<dynamic> execute(UserCredentials params) async {
-    final UserCredentials credentials = UserCredentials(
-      user: params.user,
-      password: params.password,
-    );
+    try {
+      final UserCredentials credentials = UserCredentials(
+        user: params.user,
+        password: params.password,
+      );
 
-    final UserLoginResponse response =
-        await LoginRepository().execute(credentials);
-    return response;
+      final UserLoginResponse response = await LoginRepository().execute(credentials);
+      return response;
+    } catch (e) {
+      return Future.error(e);  
+    }
   }
 }

@@ -65,32 +65,42 @@ class _loginScreenState extends State<loginScreen> {
               ),
           ),
           Divider(),
-          TextButton(
-            onPressed: () {
+            TextButton(
+             onPressed: () async {
               setState(() {
+                message = null;
+              });
+              try {
                 final LocalStorage storage = LocalStorage('localstorage_app');
+                await storage.clear(); // Clear the local storage
 
-               final credentials = UserCredentials(
-                    user: userController.text,
-                    password: passwordController.text);
+                final credentials = UserCredentials(
+                user: userController.text,
+                password: passwordController.text,
+                );
 
-                LoginUseCase().execute(credentials).then((response) {
-                   print(response.accesToken);
-                    storage.setItem("token", response.accesToken);
-                });   
+                final response = await LoginUseCase().execute(credentials);
+                storage.setItem("token", response.accesToken);
+
                 Navigator.pushNamed(context, Routes.categoryScreen);
- 
-              });                   
-            },
+              } catch (e) {
+                setState(() {
+                message = 'Login failed: ${e.toString()}';
+                  Future.delayed(const Duration(seconds: 2), () {
+                  Navigator.pushNamed(context, Routes.categoryScreen);
+                  });
+                });
+              }
+              },
             style: TextButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
               backgroundColor: Colors.blue, 
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(8.0),
               ),
             ),
             child: const Text('Ingresar', style: TextStyle(color: Colors.white)),
-          ),
+            ),
           if (message != null) 
             Text(
               message!,
