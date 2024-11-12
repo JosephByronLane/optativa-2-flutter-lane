@@ -72,7 +72,7 @@ class _loginScreenState extends State<loginScreen> {
               });
               try {
                 final LocalStorage storage = LocalStorage('localstorage_app');
-                await storage.clear(); // Clear the local storage
+                await storage.clear(); 
 
                 final credentials = UserCredentials(
                 user: userController.text,

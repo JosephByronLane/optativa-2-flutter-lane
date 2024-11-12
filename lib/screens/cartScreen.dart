@@ -16,25 +16,25 @@ class _CartScreenState extends State<CartScreen> {
   @override
   void initState() {
     super.initState();
-    _loadCartItems();
+    loadCartItems();
   }
 
-  Future<void> _loadCartItems() async {
+  Future<void> loadCartItems() async {
     await storage.ready;
     setState(() {
       cartItems = storage.getItem('cart') ?? [];
-      totalPrice = _calculateTotalPrice();
+      totalPrice = calculateTotalPrice();
     });
   }
 
-  double _calculateTotalPrice() {
+  double calculateTotalPrice() {
     return cartItems.fold(0, (sum, item) => sum + (item['totalPrice'] as double));
   }
 
-  void _removeItem(int index) {
+  void removeItem(int index) {
     setState(() {
       cartItems.removeAt(index);
-      totalPrice = _calculateTotalPrice();
+      totalPrice = calculateTotalPrice();
       storage.setItem('cart', cartItems); 
     });
   }
@@ -78,7 +78,7 @@ class _CartScreenState extends State<CartScreen> {
                             Text('Quantity: ${item['quantity']}'),
                             IconButton(
                               icon: Icon(Icons.delete),
-                              onPressed: () => _removeItem(index),
+                              onPressed: () => removeItem(index),
                             ),
                           ],
                         ),
