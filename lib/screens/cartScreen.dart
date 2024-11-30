@@ -1,3 +1,4 @@
+import 'package:examen_movil/widgets/navigationWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 
@@ -42,10 +43,8 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Cart'),
-        backgroundColor: Colors.blue,
-      ),
+      appBar: NavigationWidget(),
+
       body: cartItems.isEmpty
           ? const Center(
               child: Text(

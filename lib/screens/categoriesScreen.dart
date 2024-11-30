@@ -3,6 +3,7 @@ import 'package:examen_movil/modules/categories/domain/repository/repository.dar
 import 'package:examen_movil/modules/categories/useCase/use_case.dart';
 import 'package:examen_movil/screens/cartScreen.dart';
 import 'package:examen_movil/screens/productsScreen.dart';
+import 'package:examen_movil/widgets/navigationWidget.dart';
 import 'package:flutter/material.dart';
 
 class Categoriesscreen extends StatelessWidget {
@@ -13,24 +14,8 @@ class Categoriesscreen extends StatelessWidget {
     Future<List<CategoriesResponse>> categories = CategoriesUseCase().execute(null);
 
     return Scaffold(
-    appBar: AppBar(
-      backgroundColor: Colors.blue,
-      title: const Text(
-        'Categorias',
-        style: TextStyle(color: Colors.white),
-      ),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.shopping_cart, color: Colors.white),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => CartScreen()),
-            );
-          },
-        ),
-      ],
-    ),
+      appBar: NavigationWidget(),
+
       body: FutureBuilder<List<CategoriesResponse>>(
         future: categories,
         builder: (context, snapshot) {
